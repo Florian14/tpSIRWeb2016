@@ -19,6 +19,12 @@ Line.prototype.paint = function(ctx) {
     ctx.stroke();
 };
 
+Circle.prototype.paint = function(ctx) {
+    Shape.prototype.paint.call(this, ctx);
+    ctx.arc(this.x1, this.y1, this.radius, 0, 2*Math.PI);
+    ctx.stroke();
+};
+
 
 Drawing.prototype.paint = function(ctx) {
     ctx.fillStyle = '#F0F0F0'; // set canvas' background color
@@ -44,15 +50,16 @@ Drawing.prototype.updateShapeList = function(){
     button.setAttribute('id', 'button_'+id);
     button.setAttribute('onClick', 'drawing.deleteShape('+id+')');
     var shape = this.shapes[id];
-    console.log(shape);
 
     button.appendChild(span);
     li.appendChild(button);
 
     if(shape instanceof Rectangle)
-        li.appendChild(document.createTextNode('Rectangle (' + (shape.x1 | 0) +',' + (shape.y1 | 0) + ',' + shape.width + ',' + shape.height + ')'));
+        li.appendChild(document.createTextNode(' Rectangle (' + (shape.x1 | 0) +',' + (shape.y1 | 0) + ',' + shape.width + ',' + shape.height + ')'));
     else if(shape instanceof Line)
-        li.appendChild(document.createTextNode('Line (' + (shape.x1 | 0) +',' + (shape.y1 | 0) + ',' + (shape.y2 | 0) + ',' + (shape.y2 | 0) + ')'));
+        li.appendChild(document.createTextNode(' Line (' + (shape.x1 | 0) +',' + (shape.y1 | 0) + ',' + (shape.y2 | 0) + ',' + (shape.y2 | 0) + ')'));
+    else if(shape instanceof Circle)
+        li.appendChild(document.createTextNode(' Circle(' + (shape.x1 | 0) +',' + (shape.y1 | 0) + ',' + (shape.radius | 0) + ')'));
 
     shapeList.appendChild(li);
 };

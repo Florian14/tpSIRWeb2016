@@ -29,3 +29,11 @@ function Rectangle(x1, y1, width, height, color, dash){
     this.height = height;
 }
 Rectangle.prototype = new Shape();
+
+function Circle(x1, y1, radius, color, dash){
+    Shape.call(this, color, dash);
+    this.x1 = x1;
+    this.y1 = y1;
+    this.radius = radius;
+}
+Circle.prototype = new Shape();
