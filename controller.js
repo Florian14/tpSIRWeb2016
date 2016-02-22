@@ -29,9 +29,9 @@ function Pencil(ctx, drawing, canvas) {
 
         // create the shape
         if(this.currEditingMode == editingMode.line)
-            this.currentShape = new Line(this.DnD.getXDep(), this.DnD.getYDep(), this.DnD.getXDep(), this.DnD.getYDep(), this.currColour, this.currLineWidth);
+            this.currentShape = new Line(this.DnD.xDep, this.DnD.yDep, this.DnD.xDep, this.DnD.yDep, this.currColour, this.currLineWidth);
         else if(this.currEditingMode == editingMode.rect)
-            this.currentShape = new Rectangle(this.DnD.getXDep(), this.DnD.getYDep(), 0, 0, this.currColour, this.currLineWidth);
+            this.currentShape = new Rectangle(this.DnD.xDep, this.DnD.yDep, 0, 0, this.currColour, this.currLineWidth);
 
         // Paint it
         this.currentShape.paint(ctx, canvas);
@@ -40,9 +40,9 @@ function Pencil(ctx, drawing, canvas) {
 	this.onInteractionUpdate = function(){
         // update the shape
         if(this.currEditingMode == editingMode.line)
-            this.currentShape = new Line(this.DnD.getXDep(), this.DnD.getYDep(), this.DnD.getXFin(), this.DnD.getYFin(), this.currColour, this.currLineWidth);
+            this.currentShape = new Line(this.DnD.xDep, this.DnD.yDep, this.DnD.xFin, this.DnD.yFin, this.currColour, this.currLineWidth);
         else if(this.currEditingMode == editingMode.rect)
-            this.currentShape = new Rectangle(this.DnD.getXDep(), this.DnD.getYDep(),  this.DnD.getXFin() - this.DnD.getXDep(), this.DnD.getYFin() - this.DnD.getYDep(), this.currColour, this.currLineWidth);
+            this.currentShape = new Rectangle(this.DnD.xDep, this.DnD.yDep,  this.DnD.xFin - this.DnD.xDep, this.DnD.yFin - this.DnD.yDep, this.currColour, this.currLineWidth);
 
         // clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -53,11 +53,10 @@ function Pencil(ctx, drawing, canvas) {
 	}.bind(this);
 
 	this.onInteractionEnd = function(){
-        console.log("end");
         if(this.currEditingMode == editingMode.line)
-            this.currentShape = new Line(this.DnD.getXDep(), this.DnD.getYDep(), this.DnD.getXFin(), this.DnD.getYFin(), this.currColour, this.currLineWidth);
+            this.currentShape = new Line(this.DnD.xDep, this.DnD.yDep, this.DnD.xFin, this.DnD.yFin, this.currColour, this.currLineWidth);
         else
-            this.currentShape = new Rectangle(this.DnD.getXDep(), this.DnD.getYDep(), this.DnD.getXFin() - this.DnD.getXDep(), this.DnD.getYFin() - this.DnD.getYDep(), this.currColour, this.currLineWidth);
+            this.currentShape = new Rectangle(this.DnD.xDep, this.DnD.yDep, this.DnD.xFin - this.DnD.xDep, this.DnD.yFin - this.DnD.yDep, this.currColour, this.currLineWidth);
 
         // clear the canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -65,7 +64,7 @@ function Pencil(ctx, drawing, canvas) {
         drawing.paint(ctx, canvas);
 
         this.currentShape = 0;
-        updateShapeList();
+        drawing.updateShapeList();
 	}.bind(this);
 }
 

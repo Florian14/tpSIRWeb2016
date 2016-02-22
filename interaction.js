@@ -3,10 +3,10 @@
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 function DnD(canvas, interactor) {
     // Définir ici les attributs de la 'classe'
-    var xDep = 0;
-    var yDep = 0;
-    var xFin = 0;
-    var yFin = 0;
+    this.xDep = 0;
+    this.yDep = 0;
+    this.xFin = 0;
+    this.yFin = 0;
     var selected = false;
 
 	// Developper les 3 fonctions gérant les événements
@@ -32,16 +32,11 @@ function DnD(canvas, interactor) {
         }
     }.bind(this);
 
-    this.getXDep = function(){ return this.xDep;}.bind(this);
-    this.getYDep = function(){ return this.yDep;}.bind(this);
-    this.getXFin = function(){ return this.xFin;}.bind(this);
-    this.getYFin = function(){ return this.yFin;}.bind(this);
-
     // Associer les fonctions précédentes aux évènements du canvas.
     canvas.addEventListener('mousedown', this.presser, false);
     canvas.addEventListener('mousemove', this.deplacer, false);
     canvas.addEventListener('mouseup', this.relacher, false);
-};
+}
 
 
 // Place le point de l'événement evt relativement à la position du canvas.
@@ -51,4 +46,4 @@ function getMousePosition(canvas, evt) {
     x: evt.clientX - rect.left,
     y: evt.clientY - rect.top
   };
-};
+}
